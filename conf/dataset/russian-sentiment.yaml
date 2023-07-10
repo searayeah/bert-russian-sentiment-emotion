@@ -1,0 +1,15 @@
+name: russian-sentiment
+num_labels: 3
+labels:
+  0: neutral
+  1: positive
+  2: negative
+
+dataloader:
+  _target_: src.data.russian_sentiment.get_dataloaders
+  max_length: ${trainer.max_length}
+  batch_size: ${trainer.batch_size}
+  shuffle: ${trainer.shuffle}
+  num_workers: ${trainer.num_workers}
+  pin_memory: ${trainer.pin_memory}
+  drop_last: ${trainer.drop_last}

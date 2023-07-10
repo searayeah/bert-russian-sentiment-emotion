@@ -1,0 +1,20 @@
+program: main.py
+method: grid
+metric:
+  name: test_auc
+  goal: maximize
+parameters:
+  trainer.batch_size:
+    values: [32, 64]
+  trainer.lr:
+    values: [0.00001, 0.00005, 0.00004, 0.00003, 0.00002, 0.0001]
+  trainer.weight_decay:
+    values: [0, 0.001, 0.0001, 0.00001]
+
+project: "VKR-rubert-tiny2-cedr"
+
+command:
+  - ${env}
+  - python
+  - ${program}
+  - ${args_no_hyphens}

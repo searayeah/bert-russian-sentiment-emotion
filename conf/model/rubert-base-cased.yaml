@@ -1,0 +1,2 @@
+encoder: DeepPavlov/rubert-base-cased
+name: rubert-base-cased

@@ -1,0 +1,12 @@
+defaults:
+  - _self_
+  - dataset: cedr
+  - model: rubert-tiny2
+  - optimizer: adam
+  - trainer: ${model}-${dataset}
+
+project_name: "VKR"
+
+log_wandb: False
+
+task: telegram

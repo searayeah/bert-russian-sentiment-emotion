@@ -1,0 +1,18 @@
+name: cedr
+num_labels: 6
+labels:
+  0: no_emotion
+  1: joy
+  2: sadness
+  3: surprise
+  4: fear
+  5: anger
+
+dataloader:
+  _target_: src.data.cedr.get_dataloaders
+  max_length: ${trainer.max_length}
+  batch_size: ${trainer.batch_size}
+  shuffle: ${trainer.shuffle}
+  num_workers: ${trainer.num_workers}
+  pin_memory: ${trainer.pin_memory}
+  drop_last: ${trainer.drop_last}

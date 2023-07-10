@@ -1,0 +1,13 @@
+max_length: 512
+batch_size: 64
+shuffle: True
+num_workers: 2
+pin_memory: False
+drop_last: False
+
+lr: 0.00001
+weight_decay: 0
+
+problem_type: single_label_classification
+
+num_epochs: 5
