@@ -91,7 +91,7 @@ python main.py task="eval" model="rubert-tiny2" dataset="ru-go-emotions"
 
 ## Fine-tuned models
 
-The fine-tuned modes for each model-dataset combination, which are automatically downloaded when `task="eval"` are located in my [Hugging Face profile](https://huggingface.co/seara). #to-do maybe paste all the links here
+The fine-tuned modes for each model-dataset combination, which are automatically downloaded when `task="eval"`, are located in my [Hugging Face profile](https://huggingface.co/seara). #to-do maybe paste all the links here
 
 
 ## Results
