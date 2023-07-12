@@ -62,14 +62,65 @@ Optimizer
 - trainer.num_epochs
 ```
 
-It is not necessary to provide all the parameters, the missing ones will be automatically applied according to the defaults. Default parameters for each model-dataset combination are located in the `conf` folder.
+> `python main.py --help` might be also useful.
+
+It is not necessary to provide all the parameters, as the missing ones will be automatically applied according to the defaults. Default parameters for each model-dataset combination are located in the `conf` folder.
+
+#### Examples
+
+This will download fine-tuned [rubert-tiny2 model on the default dataset (CEDR)](https://huggingface.co/seara/rubert-tiny2-cedr) and display popular metrics.
+
+```shell
+python main.py task="eval" model="rubert-tiny2"
+```
+
+![image](https://github.com/searayeah/vkr-bert/assets/57370975/19350c0d-9bc7-410c-bc17-fa7cce67071f)
+
+You can explicitly specify the dataset:
+
+```shell
+python main.py task="eval" model="rubert-tiny2" dataset="ru-go-emotions"
+```
+
+[rubert-tiny2 trained on ru-go-emotions](https://huggingface.co/seara/rubert-tiny2-ru-go-emotions) dataset will be downloaded and evaluated.
+
+![image](https://github.com/searayeah/vkr-bert/assets/57370975/73086b9d-8d01-4e41-abe7-704e4f6c85bf)
+
+
+> Evaluation occurs on the test set, which was not used in model's training. The train/val/test split is 80%/10%/10%. 
 
 ## Fine-tuned models
 
-The fine-tuned modes for each model-dataset combination, which are automatically downloaded when `task="eval"` are located in my [Hugging Face profile](https://huggingface.co/seara).
+The fine-tuned modes for each model-dataset combination, which are automatically downloaded when `task="eval"` are located in my [Hugging Face profile](https://huggingface.co/seara). #to-do maybe paste all the links here
 
 
+## Results
 
+All in all, models achieve state-of-the-art F1-scores.
+#to-do
 
+## Folder structure
 
+```
+vkr-bert
+├── conf                    - Hydra config files folder
+│   ├── dataset             - dataset configs
+│   ├── loss                - loss funtion configs
+│   ├── model               - model configs
+│   ├── optimizer           - optimizer configs
+│   └── trainer             - trainer configs for each model-dataset combination
+├── data                    - raw data folder
+├── main.py                 - main execution file
+├── models                  - Location of fine-tuned models
+├── notebooks               - Jupyter Notebooks folder
+│   ├── datasets            - analysis and visualization
+│   └── error-analysis      - model errors analysis
+├── requirements.txt        - Python requirements
+├── src                     - source code
+│   ├── data                - data download and preprocess functions
+│   ├── model               - model creation functions
+│   ├── trainer             - training, metrics and validation functions
+│   └── utils               - some extra functions
+└── strings                 - yaml strings for translating classes to the Russian
+```
 
