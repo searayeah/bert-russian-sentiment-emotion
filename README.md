@@ -63,6 +63,7 @@ Optimizer
 ```
 
 > `python main.py --help` might be also useful.
+> For Telegram bot it is required to have Telegram bot token in `.env` file or `TG_TOKEN` environment varibale.
 
 It is not necessary to provide all the parameters, as the missing ones will be automatically applied according to the defaults. Default parameters for each model-dataset combination are located in the `conf` folder.
 
