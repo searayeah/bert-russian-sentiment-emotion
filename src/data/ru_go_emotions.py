@@ -6,7 +6,7 @@ from src.utils.utils import binarize_labels
 
 def preprocess(tokenizer, max_length):
     num_labels = 28
-    dataset = load_dataset("seara/ru-go-emotions")
+    dataset = load_dataset("seara/ru_go_emotions")
 
     processed_dataset = dataset.map(
         lambda x: tokenizer(x["text"], truncation=True, max_length=max_length),
@@ -31,7 +31,6 @@ def get_dataloaders(
     pin_memory,
     drop_last,
 ):
-
     dataset = preprocess(tokenizer, max_length)
     data_collator = DataCollatorWithPadding(tokenizer)
 

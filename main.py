@@ -7,7 +7,6 @@ import hydra
 from omegaconf import DictConfig, OmegaConf
 from hydra.utils import instantiate, call
 from src.utils.utils import save_model, push_to_hub
-from src.utils.telegram_deploy import main as launch_telegram
 
 # turn off bert warnings
 os.environ["TRANSFORMERS_NO_ADVISORY_WARNINGS"] = "true"
@@ -23,9 +22,7 @@ os.environ["HYDRA_FULL_ERROR"] = "1"
 
 @hydra.main(version_base=None, config_path="conf", config_name="config")
 def main(cfg: DictConfig):
-
     if cfg.task == "train":
-
         tokenizer, model = get_model(
             cfg.model.encoder,
             cfg.dataset.labels,
@@ -64,7 +61,6 @@ def main(cfg: DictConfig):
 
         ask = input("Upload to hub?: ")
         if ask == "y" or ask == "yes":
-
             save_model(
                 model,
                 tokenizer,
@@ -74,7 +70,6 @@ def main(cfg: DictConfig):
             push_to_hub(model, tokenizer, f"{cfg.model.name}-{cfg.dataset.name}")
 
     elif cfg.task == "eval":
-
         tokenizer, model = get_model(
             f"seara/{cfg.model.name}-{cfg.dataset.name}",
             cfg.dataset.labels,
@@ -93,9 +88,6 @@ def main(cfg: DictConfig):
             labels=cfg.dataset.labels,
             problem_type=cfg.trainer.problem_type,
         )
-    elif cfg.task == "telegram":
-        launch_telegram()
-
 
 
 if __name__ == "__main__":

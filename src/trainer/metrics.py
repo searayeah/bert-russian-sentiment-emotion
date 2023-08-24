@@ -9,6 +9,7 @@ import numpy as np
 
 THRESHOLD = 0.5
 
+
 # correct
 def calculate_aucs_multilabel(y_true, y_pred, num_labels):
     return [roc_auc_score(y_true[:, i], y_pred[:, i]) for i in range(num_labels)]
@@ -75,22 +76,35 @@ def calculate_metrics_multilabel(y_true, y_pred, labels):
     num_labels = len(labels)
     target_names = list(labels.values())
 
-    aucs = dict(
-        zip(target_names, calculate_aucs_multilabel(y_true, y_pred, num_labels))
-    )
-    auc_macro = roc_auc_score(y_true, y_pred)
+    auc_macro = roc_auc_score(y_true, y_pred, average="macro")
+    auc_micro = roc_auc_score(y_true, y_pred, average="micro")
+    auc_weighted = roc_auc_score(y_true, y_pred, average="weighted")
+    aucs = roc_auc_score(y_true, y_pred, average=None)
 
     report_dict = get_report_multilabel(
         y_true, y_pred, target_names=target_names, output_dict=True
     )
 
-    for key in report_dict.keys():
-        if key in target_names:
-            report_dict[key]["auc-roc"] = aucs[key]
-        elif key == "macro avg":
-            report_dict[key]["auc-roc"] = auc_macro
-        else:
-            report_dict[key]["auc-roc"] = None
+    report_dict["macro avg"]["auc-roc"] = auc_macro
+    report_dict["micro avg"]["auc-roc"] = auc_micro
+    report_dict["weighted avg"]["auc-roc"] = auc_weighted
+
+    for i, target in enumerate(target_names):
+        report_dict[target]["auc-roc"] = aucs[i]
+
+
+
+    # aucs = dict(
+    #     zip(target_names, calculate_aucs_multilabel(y_true, y_pred, num_labels))
+    # )
+
+    # for key in report_dict.keys():
+    #     if key in target_names:
+    #         report_dict[key]["auc-roc"] = aucs[key]
+    #     elif key == "macro avg":
+    #         report_dict[key]["auc-roc"] = auc_macro
+    #     else:
+    #         report_dict[key]["auc-roc"] = None
 
     return report_dict
 
@@ -109,13 +123,22 @@ def calculate_metrics_multiclass(y_true, y_pred, labels):
     num_labels = len(labels)
     target_names = list(labels.values())
 
-    auc_macro = roc_auc_score(y_true, y_pred, multi_class="ovr")
-
     report_dict = get_report_multiclass(
         y_true, y_pred, target_names=target_names, output_dict=True
     )
 
-    report_dict["auc-roc"] = auc_macro
+    auc_macro = roc_auc_score(y_true, y_pred, multi_class="ovr", average="macro")
+    auc_weighted = roc_auc_score(y_true, y_pred, multi_class="ovr", average="weighted")
+    aucs = roc_auc_score(y_true, y_pred, multi_class="ovr", average=None)
+
+    report_dict["macro avg"]["auc-roc"] = auc_macro
+    report_dict["weighted avg"]["auc-roc"] = auc_weighted
+
+    for i, target in enumerate(target_names):
+        report_dict[target]["auc-roc"] = aucs[i]
+
+    # report_dict["auc-roc"] = auc_macro
+    report_dict.pop("accuracy")
 
     return report_dict
 

@@ -13,9 +13,9 @@ import yaml
 from src.utils.utils import fix_text
 
 
-ENV_PATH = "/home/seara/Desktop/Github/.env"
+ENV_PATH = "../.env/"
 
-load_dotenv(f"{ENV_PATH}/vkr.env")
+load_dotenv(f"{ENV_PATH}vkr.env")
 
 threshold = 0.4
 
@@ -33,11 +33,11 @@ ru_go_emotions = pipeline(model="seara/rubert-tiny2-ru-go-emotions", device=0)
 russian_sentiment = pipeline(model="seara/rubert-tiny2-russian-sentiment", device=0)
 
 
-tokenizer = AutoTokenizer.from_pretrained("VadimAI/Dialog-system")
-model = AutoModelForCausalLM.from_pretrained("VadimAI/Dialog-system")
-model.cuda()
+# tokenizer = AutoTokenizer.from_pretrained("VadimAI/Dialog-system")
+# model = AutoModelForCausalLM.from_pretrained("VadimAI/Dialog-system")
+# model.cuda()
 
-tokenizer.pad_token = tokenizer.eos_token
+# tokenizer.pad_token = tokenizer.eos_token
 
 print("Loaded models")
 
@@ -83,25 +83,25 @@ def form_answer(text, threshold):
     return answer, set(emotions_set)
 
 
-def generate_response(prompt, max_length=256):
-    input_ids = tokenizer.encode(prompt, return_tensors="pt")
+# def generate_response(prompt, max_length=256):
+#     input_ids = tokenizer.encode(prompt, return_tensors="pt")
 
-    input_ids = input_ids.to(model.device)
+#     input_ids = input_ids.to(model.device)
 
-    output = model.generate(
-        input_ids, max_length=max_length, num_return_sequences=1, temperature=1000
-    )
+#     output = model.generate(
+#         input_ids, max_length=max_length, num_return_sequences=1, temperature=1000
+#     )
 
-    full_response = tokenizer.decode(output[0], skip_special_tokens=True)
+#     full_response = tokenizer.decode(output[0], skip_special_tokens=True)
 
-    bot_index = full_response.find("<bot>")
+#     bot_index = full_response.find("<bot>")
 
-    if bot_index != -1:
-        response = full_response[bot_index + 5 :].strip()
-    else:
-        response = full_response.strip()
+#     if bot_index != -1:
+#         response = full_response[bot_index + 5 :].strip()
+#     else:
+#         response = full_response.strip()
 
-    return response
+#     return response
 
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -112,7 +112,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         "Найденные эмоции: " + f"*{', '.join(emotions)}*", parse_mode="MARKDOWNV2"
     )
     # await update.message.reply_text(answer, parse_mode="MARKDOWNV2")
-    await update.message.reply_text(generate_response(update.message.text))
+    # await update.message.reply_text(generate_response(update.message.text))
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
