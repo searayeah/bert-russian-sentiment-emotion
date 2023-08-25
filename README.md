@@ -13,7 +13,7 @@ __[WandB](https://wandb.ai)__ were used for experiment tracking.
 
 ## Models and datasets
 
-For the Russian language I found two models, heavy and slow __[ruBERT](https://huggingface.co/DeepPavlov/rubert-base-cased)__, and light and fast __[ruBERT-tiny2](https://huggingface.co/cointegrated/rubert-tiny2)__. The datasets I used for sentiment analysis (multi-class classification) were taken from [Smetanin's review article](https://github.com/sismetanin/sentiment-analysis-in-russian). I chose the most good looking ones (which have at least 3 classes) and unioned them into one __russian-sentiment__ dataset. For the classification of emotions (multi-label classification), I used __[CEDR](https://huggingface.co/datasets/cedr)__ dataset, the only one I found for the Russian language. Therefore I decided to translate English __[GoEmotions](https://huggingface.co/datasets/go_emotions)__ dataset using the [deep-translator](https://github.com/nidhaloff/deep-translator) Python library with Google Translate engine. The translated dataset is called __RuGoEmotions__ and is available on [Hugging Face](https://huggingface.co/datasets/seara/ru_go_emotions) and [Github](https://github.com/searayeah/Ru-GoEmotions). 
+For the Russian language I found two models, heavy and slow __[ruBERT](https://huggingface.co/DeepPavlov/rubert-base-cased)__, and light and fast __[ruBERT-tiny2](https://huggingface.co/cointegrated/rubert-tiny2)__. The datasets I used for sentiment analysis (multi-class classification) were taken from [Smetanin's review article](https://github.com/sismetanin/sentiment-analysis-in-russian). I chose the most good looking ones (which have at least 3 classes) and unioned them into one __russian-sentiment__ dataset. For the classification of emotions (multi-label classification), I used __[CEDR](https://huggingface.co/datasets/cedr)__ dataset, the only one I found for the Russian language. Therefore I decided to translate English __[GoEmotions](https://huggingface.co/datasets/go_emotions)__ dataset using the [deep-translator](https://github.com/nidhaloff/deep-translator) Python library with Google Translate engine. The translated dataset is called __RuGoEmotions__ and is available on [Hugging Face](https://huggingface.co/datasets/seara/ru_go_emotions) and [Github](https://github.com/searayeah/Ru-GoEmotions).
 
 _Download links for all Russian sentiment datasets collected by Smetanin can be found in this [repository](https://github.com/searayeah/russian-sentiment-emotion-datasets)._
 
@@ -27,7 +27,8 @@ python main.py <command>=<arg>
 
 _If there are no options provided, the default configuration located at the `conf/config.yaml` will be executed._
 
-#### Commands and args
+### Commands and args
+
 ```
 General:
 - task
