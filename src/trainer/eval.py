@@ -23,7 +23,6 @@ def eval(model, test_dataloader, labels, problem_type, return_debug=False):
     print(df)
     df.to_csv("runs/last_run.csv")
 
-
     if return_debug:
         return test_y_true, test_y_pred, df
     else:

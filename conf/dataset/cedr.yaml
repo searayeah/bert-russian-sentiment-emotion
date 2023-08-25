@@ -1,4 +1,4 @@
-name: cedr
+name: cedr-russian-emotion
 num_labels: 6
 labels:
   0: no_emotion

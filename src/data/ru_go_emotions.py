@@ -6,7 +6,7 @@ from src.utils.utils import binarize_labels
 
 def preprocess(tokenizer, max_length):
     num_labels = 28
-    dataset = load_dataset("seara/ru_go_emotions")
+    dataset = load_dataset("seara/ru_go_emotions", "simplified")
 
     processed_dataset = dataset.map(
         lambda x: tokenizer(x["text"], truncation=True, max_length=max_length),
