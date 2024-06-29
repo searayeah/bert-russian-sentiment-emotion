@@ -6,7 +6,7 @@ The aim of the project is to fine-tune the state-of-the-art [transformer](https:
 
 ## Metrics and fine-tuned models
 
-The fine-tuned models for each model-dataset combination, which are automatically downloaded when `task="eval"`, and corresponding **metrics** are located in my [Hugging Face profile](https://huggingface.co/seara).
+The fine-tuned models for each model-dataset combination and corresponding **metrics** are located in my [Hugging Face profile](https://huggingface.co/seara).
 
 Example usage:
 
