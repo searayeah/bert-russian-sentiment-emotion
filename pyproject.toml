@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "bert-ru-sentiment-emotion"
+version = "0.1.0"
+description = "Russian sentiment and emotion text classification project using BERT models"
+authors = ["searayeah"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+hydra-core = "^1.3.2"
+numpy = "^1.26.4"
+omegaconf = "^2.3.0"
+pandarallel = "^1.6.5"
+pandas = "^2.2.1"
+scikit-learn = "^1.4.1.post1"
+torch = "^2.2.2"
+tqdm = "^4.66.2"
+transformers = "^4.39.2"
+wandb = "^0.16.5"
+datasets = "^2.18.0"
+openpyxl = "^3.1.2"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.7.0"
+isort = "^5.13.2"
+black = "^24.3.0"
+
+[tool.black]
+line-length = 90
+target-version = ["py39"]
+
+[tool.isort]
+profile = "black"
+line_length = 90
+float_to_top = true
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]

@@ -11,7 +11,7 @@ parameters:
   trainer.weight_decay:
     values: [0, 0.001, 0.0001, 0.00001]
 
-project: "VKR-rubert-tiny2-cedr"
+project: "bert-russian-sentiment-emotion-sweep"
 
 command:
   - ${env}

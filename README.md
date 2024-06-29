@@ -2,20 +2,37 @@
 
 ## Introduction
 
-The aim of the project is to fine-tune the state-of-the-art [transformer](https://arxiv.org/abs/1706.03762) models for classifying __emotions__ and __sentiment__ of short input sentences in the Russian language. Since there were multiple BERT models and datasets I decided to structure this DS project in a proper way. So I found multiple popular templates and made something similar. I also discovered a magnifiscent library for managing run configurations - __[Hydra](https://hydra.cc)__. Here is the list of the templates that inspired me:
+The aim of the project is to fine-tune the state-of-the-art [transformer](https://arxiv.org/abs/1706.03762) models for classifying **emotions** and **sentiment** of short input sentences in the Russian language. Since there were multiple BERT models and datasets I decided to use a magnifiscent library for managing run configurations - **[Hydra](https://hydra.cc)**. **[WandB](https://wandb.ai)** was used for experiment tracking.
 
-- [cookiecutter-data-science](https://drivendata.github.io/cookiecutter-data-science/)
-- [pytorch_tempest](https://github.com/Erlemar/pytorch_tempest/)
-- [lightning-hydra-template](https://github.com/ashleve/lightning-hydra-template)
-- [pytorch-template](https://github.com/victoresque/pytorch-template)
+## Metrics and fine-tuned models
 
-__[WandB](https://wandb.ai)__ were used for experiment tracking.
+The fine-tuned models for each model-dataset combination and corresponding **metrics** are located in my [Hugging Face profile](https://huggingface.co/seara).
 
-## Models and datasets
+Example usage:
 
-For the Russian language I found two models, heavy and slow __[ruBERT](https://huggingface.co/DeepPavlov/rubert-base-cased)__, and light and fast __[ruBERT-tiny2](https://huggingface.co/cointegrated/rubert-tiny2)__. The datasets I used for sentiment analysis (multi-class classification) were taken from [Smetanin's review article](https://github.com/sismetanin/sentiment-analysis-in-russian). I chose the most good looking ones (which have at least 3 classes) and unioned them into one __russian-sentiment__ dataset. For the classification of emotions (multi-label classification), I used __[CEDR](https://huggingface.co/datasets/cedr)__ dataset, the only one I found for the Russian language. Therefore I decided to translate English __[GoEmotions](https://huggingface.co/datasets/go_emotions)__ dataset using the [deep-translator](https://github.com/nidhaloff/deep-translator) Python library with Google Translate engine. The translated dataset is called __RuGoEmotions__ and is available on [Hugging Face](https://huggingface.co/datasets/seara/ru_go_emotions) and [Github](https://github.com/searayeah/ru-goemotions).
+```python
+from transformers import pipeline
+model = pipeline(model="seara/rubert-tiny2-ru-go-emotions")
+model("Привет, ты мне нравишься!")
+# [{'label': 'love', 'score': 0.5955629944801331}]
+```
 
-_Download links for all Russian sentiment datasets collected by Smetanin can be found in this [repository](https://github.com/searayeah/russian-sentiment-emotion-datasets)._
+**List of all trained models:**
+
+- Sentiment
+  - [rubert-base-cased-russian-sentiment](https://huggingface.co/seara/rubert-base-cased-russian-sentiment)
+  - [rubert-tiny2-russian-sentiment](https://huggingface.co/seara/rubert-tiny2-russian-sentiment)
+- Emotion
+  - [rubert-base-cased-cedr-russian-emotion](https://huggingface.co/seara/rubert-base-cased-cedr-russian-emotion)
+  - [rubert-tiny2-cedr-russian-emotion](https://huggingface.co/seara/rubert-tiny2-cedr-russian-emotion)
+  - [rubert-base-cased-ru-go-emotions](https://huggingface.co/seara/rubert-base-cased-ru-go-emotions)
+  - [rubert-tiny2-ru-go-emotions](https://huggingface.co/seara/rubert-tiny2-ru-go-emotions)
+
+## Models and datasets description
+
+For the Russian language I found two models, heavy and slow **[ruBERT](https://huggingface.co/DeepPavlov/rubert-base-cased)**, and light and fast **[ruBERT-tiny2](https://huggingface.co/cointegrated/rubert-tiny2)**. The datasets I used for sentiment analysis (multi-class classification) were taken from [Smetanin's review article](https://github.com/sismetanin/sentiment-analysis-in-russian). I chose the most good looking ones (which have at least 3 classes) and unioned them into one **russian-sentiment** dataset. For the classification of emotions (multi-label classification), I used **[CEDR](https://huggingface.co/datasets/cedr)** dataset, the only one I found for the Russian language. Therefore I decided to translate English **[GoEmotions](https://huggingface.co/datasets/go_emotions)** dataset using the [deep-translator](https://github.com/nidhaloff/deep-translator) Python library with Google Translate engine. The translated dataset is called **RuGoEmotions** and is available on [Hugging Face](https://huggingface.co/datasets/seara/ru_go_emotions) and [Github](https://github.com/searayeah/ru-goemotions).
+
+> Download links for all Russian sentiment datasets collected by Smetanin can be found in this [repository](https://github.com/searayeah/russian-sentiment-emotion-datasets).
 
 ## Run configuration
 
@@ -84,23 +101,10 @@ python main.py task="eval" model="rubert-tiny2" dataset="ru-go-emotions"
 
 _Evaluation occurs on the test set, which was not used in model's training. The train/val/test split is 80%/10%/10%._
 
-## Metrics and fine-tuned models
-
-The fine-tuned models for each model-dataset combination, which are automatically downloaded when `task="eval"`, and corresponding __metrics__ are located in my [Hugging Face profile](https://huggingface.co/seara).
-
-List of all trained models:
-
-- [rubert-base-cased-russian-sentiment](https://huggingface.co/seara/rubert-base-cased-russian-sentiment)
-- [rubert-tiny2-russian-sentiment](https://huggingface.co/seara/rubert-tiny2-russian-sentiment)
-- [rubert-base-cased-cedr-russian-emotion](https://huggingface.co/seara/rubert-base-cased-cedr-russian-emotion)
-- [rubert-tiny2-cedr-russian-emotion](https://huggingface.co/seara/rubert-tiny2-cedr-russian-emotion)
-- [rubert-base-cased-ru-go-emotions](https://huggingface.co/seara/rubert-base-cased-ru-go-emotions)
-- [rubert-tiny2-ru-go-emotions](https://huggingface.co/seara/rubert-tiny2-ru-go-emotions)
-
-## Folder structure
+## Project structure
 
 ```
-vkr-bert
+bert-russian-sentiment-emotion
 ├── conf                    - Hydra config files folder
 │   ├── dataset             - dataset configs
 │   ├── loss                - loss funtion configs
@@ -121,3 +125,10 @@ vkr-bert
 │   └── utils               - some extra functions
 └── strings                 - yaml strings for translating classes to the Russian
 ```
+
+Here is the list of the templates that inspired me:
+
+- [cookiecutter-data-science](https://drivendata.github.io/cookiecutter-data-science/)
+- [pytorch_tempest](https://github.com/Erlemar/pytorch_tempest/)
+- [lightning-hydra-template](https://github.com/ashleve/lightning-hydra-template)
+- [pytorch-template](https://github.com/victoresque/pytorch-template)

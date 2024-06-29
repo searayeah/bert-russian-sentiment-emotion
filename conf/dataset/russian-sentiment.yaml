@@ -6,7 +6,7 @@ labels:
   2: negative
 
 dataloader:
-  _target_: src.data.russian_sentiment.get_dataloaders
+  _target_: bert_ru_sentiment_emotion.data.russian_sentiment.get_dataloaders
   max_length: ${trainer.max_length}
   batch_size: ${trainer.batch_size}
   shuffle: ${trainer.shuffle}

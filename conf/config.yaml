@@ -5,7 +5,7 @@ defaults:
   - optimizer: adam
   - trainer: ${model}-${dataset}
 
-project_name: "VKR"
+project_name: "bert-russian-sentiment-emotion"
 
 log_wandb: False
 

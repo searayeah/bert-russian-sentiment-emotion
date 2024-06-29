@@ -31,7 +31,7 @@ labels:
   27: neutral
 
 dataloader:
-  _target_: src.data.ru_go_emotions.get_dataloaders
+  _target_: bert_ru_sentiment_emotion.data.ru_go_emotions.get_dataloaders
   max_length: ${trainer.max_length}
   batch_size: ${trainer.batch_size}
   shuffle: ${trainer.shuffle}
