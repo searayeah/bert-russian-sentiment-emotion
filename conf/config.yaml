@@ -1,11 +1,11 @@
 defaults:
   - _self_
   - dataset: cedr
-  - model: rubert-tiny2
+  - model: rubert-base-cased
   - optimizer: adam
   - trainer: ${model}-${dataset}
 
-project_name: "VKR"
+project_name: "bert-russian-sentiment-emotion"
 
 log_wandb: False
 
