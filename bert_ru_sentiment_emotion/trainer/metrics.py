@@ -15,7 +15,6 @@ def get_report_multilabel(y_true, y_pred, target_names, output_dict):
 
 
 def calculate_metrics_multilabel(y_true, y_pred, labels):
-    len(labels)
     target_names = list(labels.values())
 
     auc_macro = roc_auc_score(y_true, y_pred, average="macro")
