@@ -1,8 +1,0 @@
-deep-translator
-nltk
-python-dotenv
-python_telegram_bot
-pyyaml
-translate
-translators
-translators
